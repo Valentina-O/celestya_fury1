@@ -35,9 +35,11 @@ public class SoundManager implements ISoundPlayer {
      * Constructor privado. Registra los sonidos disponibles del juego.
      */
     private SoundManager() {
-        rutas.put("attack", "assets/sounds/attack.wav");
-        rutas.put("hit",    "assets/sounds/hit.wav");
-        rutas.put("defeat", "assets/sounds/defeat.wav");
+        rutas.put("attack", "assets/sounds/Explosion.wav");
+        rutas.put("hit",    "assets/sounds/Ganador.wav");
+        rutas.put("defeat", "assets/sounds/Patada.wav");
+        rutas.put("special", "assets/sounds/Puño.wav");
+
     }
 
     /**
