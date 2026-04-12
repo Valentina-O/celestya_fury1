@@ -51,7 +51,7 @@ public class Main {
             }
 
             // 6. Inicializar el Controlador de Batalla (Cerebro del juego)
-            BattleController battle = new BattleController(empiezoYo);
+            BattleController battle = new BattleController(empiezoYo, SoundManager.getInstance());
 
             // 7. Conectar la escucha UDP directamente al BattleController
             UdpManager.getInstance().iniciarEscucha(mensaje -> {
