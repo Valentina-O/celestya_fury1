@@ -1,72 +1,83 @@
 package org.valeneisa.core;
 
-import org.valeneisa.network.DatabaseClient;
-import org.valeneisa.network.UdpManager;
-import org.valeneisa.ui.GameWindow;
-import javax.swing.JOptionPane;
-import java.net.InetAddress;
+import com.sun.net.httpserver.HttpServer;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
-    public static void main(String[] args) {
-        // 1. Pedir nombre (Requisito 2.8)
-        String nombre = JOptionPane.showInputDialog("¡Bienvenida a Celestial Fury!\nIngresa tu nombre:");
+    public static void main(String[] args) throws IOException {
+        // Working directory es: ...\celestya_fury1\src
+        // Los archivos están en: ...\celestya_fury1\src\resources\static\
+        String workDir = System.getProperty("user.dir");
+        System.out.println("📁 Carpeta de trabajo detectada en: " + workDir);
 
-        // Si cancela o deja vacío, le damos un nombre por defecto
-        if (nombre == null || nombre.trim().isEmpty()) {
-            nombre = "Player_Valen";
-        }
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
-        try {
-            // 2. Obtener IP local
-            String miIp = InetAddress.getLocalHost().getHostAddress();
+        server.createContext("/", exchange -> {
+            String uriPath = exchange.getRequestURI().getPath();
+            String targetFile = (uriPath.equals("/") || uriPath.isEmpty()) ? "index.html" : uriPath;
+            if (targetFile.startsWith("/")) targetFile = targetFile.substring(1);
 
-            // 3. Registrar en la Base de Datos (PHP + MariaDB)
-            DatabaseClient db = new DatabaseClient();
-            db.registrarJugador(nombre, miIp);
-            System.out.println("🚀 Registrando a: " + nombre + " con IP: " + miIp);
+            // workDir ya ES la carpeta "src", así que buscamos directamente dentro de ella
+            String[] carpetasBase = {
+                    workDir + "/resources/static/",
+                    workDir + "/main/resources/static/",
+                    workDir + "/resources/",
+                    workDir + "/main/resources/",
+                    workDir + "/static/"
+            };
 
-            // 4. Búsqueda de Rival (Matchmaking)
-            System.out.println("🔎 Buscando rival en la base de datos...");
-            String ipRival = "0.0.0.0";
-            int intentos = 0;
-
-            while (ipRival.equals("0.0.0.0") && intentos < 10) {
-                ipRival = db.obtenerIpEnemigo(nombre);
-
-                if (ipRival.equals("0.0.0.0")) {
-                    Thread.sleep(2000);
-                    System.out.println("... sigo buscando rival (" + (intentos + 1) + "/10) ...");
-                    intentos++;
+            Path foundPath = null;
+            for (String carpeta : carpetasBase) {
+                Path p = Paths.get(carpeta + targetFile);
+                if (Files.exists(p) && !Files.isDirectory(p)) {
+                    foundPath = p;
+                    break;
                 }
             }
 
-            // 5. Configurar la red y el estado inicial de la batalla
-            boolean empiezoYo = false;
-            if (!ipRival.equals("0.0.0.0") && !ipRival.equals("no_hay_rivales")) {
-                System.out.println("⚔️ ¡Rival encontrado! Su IP es: " + ipRival);
-                UdpManager.getInstance().setIpDestino(ipRival);
-                empiezoYo = true; // El que encuentra rival suele iniciar el ataque
+            if (foundPath != null) {
+                byte[] content = Files.readAllBytes(foundPath);
+
+                String contentType = "text/html";
+                String name = foundPath.toString().toLowerCase();
+                if      (name.endsWith(".css"))  contentType = "text/css";
+                else if (name.endsWith(".js"))   contentType = "application/javascript";
+                else if (name.endsWith(".png"))  contentType = "image/png";
+                else if (name.endsWith(".svg"))  contentType = "image/svg+xml";
+                else if (name.endsWith(".wav"))  contentType = "audio/wav";
+                else if (name.endsWith(".json")) contentType = "application/json";
+                else if (name.endsWith(".ico"))  contentType = "image/x-icon";
+
+                exchange.getResponseHeaders().set("Content-Type", contentType + "; charset=UTF-8");
+                exchange.sendResponseHeaders(200, content.length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(content);
+                }
             } else {
-                System.out.println(" No hay nadie más conectado. Esperando retador...");
+                System.err.println("❌ No encontré: /" + targetFile + " en " + workDir);
+                exchange.sendResponseHeaders(404, 0);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(("404 - Archivo no encontrado: " + targetFile).getBytes());
+                }
             }
+            exchange.close();
+        });
 
-            // 6. Inicializar el Controlador de Batalla (Cerebro del juego)
-            BattleController battle = new BattleController(empiezoYo, SoundManager.getInstance());
+        server.setExecutor(null);
+        server.start();
 
-            // 7. Conectar la escucha UDP directamente al BattleController
-            UdpManager.getInstance().iniciarEscucha(mensaje -> {
-                System.out.println(" Red -> Recibido: " + mensaje);
-                battle.procesarEntradaRival(mensaje);
-            });
+        System.out.println("🚀 Servidor activo en http://localhost:8000");
 
-            // 8. Lanzar la interfaz gráfica pasando el controlador
-            // NOTA: Asegúrate de que el constructor de GameWindow acepte (String, BattleController)
-            new GameWindow(nombre, battle);
-
-            System.out.println(" Todo el sistema de backend está corriendo. ¡Listo para la interfaz!");
-
+        try {
+            Desktop.getDesktop().browse(new URI("http://localhost:8000/"));
         } catch (Exception e) {
-            System.err.println(" Error crítico en el inicio:");
             e.printStackTrace();
         }
     }

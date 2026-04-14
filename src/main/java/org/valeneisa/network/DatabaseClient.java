@@ -10,8 +10,12 @@ import java.util.Scanner;
  */
 public class DatabaseClient {
 
-    // Cambiar a la IP de la máquina que tenga el XAMPP si no es la local
+    // Cambiar a la IP de la máquina que tenga el XAMPP si no es la local HEAD
     private static final String BASE_URL = "http://localhost/celestial_fury/";    /**
+=======
+    private static final String BASE_URL = "http://192.168.1.7/celestial_fury/";;
+    /**
+>>>>>>> origin/feature/frontend-css-fixes
      * Registra al jugador actual en la base de datos de forma asíncrona.
      */
     public void registrarJugador(String nombre, String ip) {

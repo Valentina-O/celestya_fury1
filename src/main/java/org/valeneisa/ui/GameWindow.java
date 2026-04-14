@@ -5,6 +5,7 @@ import org.valeneisa.core.Habilidad;
 import org.valeneisa.core.HabilidadFactory;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,103 +14,65 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Ventana principal de la interfaz gráfica de Celestial Fury.
- *
- * <p>Muestra el estado de la batalla y permite al jugador activar
- * habilidades mediante botones o clic directo en el área de juego.</p>
- *
- * <p>Principios SOLID aplicados:</p>
- * <ul>
- *   <li><b>S</b> — Solo gestiona la presentación visual;
- *       toda la lógica de combate vive en {@link BattleController}.</li>
- *   <li><b>O</b> — Nuevas habilidades se agregan en {@link HabilidadFactory}
- *       sin modificar esta clase.</li>
- *   <li><b>D</b> — Depende de {@link BattleController} como abstracción
- *       de la lógica de batalla.</li>
- * </ul>
- *
- * @author Celestial Fury Team
- * @version 1.0
+ * Ventana principal de Celestial Fury con estética de Las Chicas Superpoderosas.
  */
 public class GameWindow extends JFrame {
 
-    /** Controlador de batalla que gestiona la lógica del juego. */
     private final BattleController battle;
-
-    /** Etiqueta superior que muestra vida y turno actuales. */
     private JLabel labelStatus;
-
-    /** Panel central donde ocurre la acción visual del juego. */
     private JPanel panelJuego;
-
-    /** Mapa de nombre de habilidad → botón correspondiente en la UI. */
     private final Map<String, JButton> botonesHabilidad = new HashMap<>();
-
-    /** Habilidad de acceso rápido al hacer clic en el panel central. */
     private static final String HABILIDAD_RAPIDA = "Golpe_Basico";
 
-    /**
-     * Construye y muestra la ventana principal del juego.
-     *
-     * @param nombreLocal nombre del jugador local (se muestra en el título)
-     * @param battle      controlador de batalla ya inicializado
-     */
+    // Paleta de Colores "Las Chicas Superpoderosas"
+    private final Color COLOR_BOMBON = new Color(255, 182, 225);  // Rosa
+    private final Color COLOR_BURBUJA = new Color(173, 216, 230); // Azul
+    private final Color COLOR_BELLOTA = new Color(144, 238, 144); // Verde
+    private final Color COLOR_FONDO_OSCURO = new Color(26, 26, 46); // Espacial
+
     public GameWindow(String nombreLocal, BattleController battle) {
         this.battle = battle;
         construirVentana(nombreLocal);
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  Construcción de la ventana
-    // ─────────────────────────────────────────────────────────
-
-    /**
-     * Inicializa y compone todos los paneles de la ventana.
-     *
-     * @param nombre nombre del jugador local
-     */
     private void construirVentana(String nombre) {
-        setTitle("Celestial Fury - Jugador: " + nombre);
-        setSize(800, 600);
+        setTitle("♡ CELESTIAL FURY ♡ - " + nombre);
+        setSize(900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         add(construirPanelEstado(), BorderLayout.NORTH);
         add(construirPanelJuego(),  BorderLayout.CENTER);
         add(construirPanelHabilidades(), BorderLayout.SOUTH);
+
+        setLocationRelativeTo(null); // Centrar en pantalla
     }
 
-    /**
-     * Construye el panel superior con la etiqueta de estado (vida y turno).
-     *
-     * @return panel configurado listo para añadir al frame
-     */
     private JPanel construirPanelEstado() {
         labelStatus = new JLabel(obtenerTextoEstado(), SwingConstants.CENTER);
-        labelStatus.setFont(new Font("Consolas", Font.BOLD, 18));
-        labelStatus.setForeground(Color.WHITE);
+        // Usamos una fuente más gruesa y grande
+        labelStatus.setFont(new Font("Arial", Font.ITALIC, 24));
+        labelStatus.setForeground(COLOR_BOMBON);
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLACK);
+        panel.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, Color.PINK));
         panel.add(labelStatus);
         return panel;
     }
 
-    /**
-     * Construye el panel central (área de juego) con el listener de mouse.
-     *
-     * @return panel configurado con evento de clic
-     */
     private JPanel construirPanelJuego() {
-        panelJuego = new JPanel();
-        panelJuego.setBackground(Color.DARK_GRAY);
+        panelJuego = new JPanel(new BorderLayout());
+        panelJuego.setBackground(COLOR_FONDO_OSCURO);
+
+        // Título de la Arena (Efecto Neon)
+        JLabel arenaTitle = new JLabel("⚡ ARENA CELESTIAL ⚡", SwingConstants.CENTER);
+        arenaTitle.setFont(new Font("Monospaced", Font.BOLD, 30));
+        arenaTitle.setForeground(Color.WHITE);
+        panelJuego.add(arenaTitle, BorderLayout.CENTER);
+
         panelJuego.addMouseListener(new MouseAdapter() {
-            /**
-             * Al hacer clic en el área de juego se activa la habilidad rápida.
-             *
-             * @param e evento de mouse recibido
-             */
             @Override
             public void mousePressed(MouseEvent e) {
                 ejecutarHabilidadRapida();
@@ -118,15 +81,13 @@ public class GameWindow extends JFrame {
         return panelJuego;
     }
 
-    /**
-     * Construye el panel inferior con los botones de habilidades,
-     * generados dinámicamente desde {@link HabilidadFactory}.
-     *
-     * @return panel de habilidades configurado
-     */
     private JPanel construirPanelHabilidades() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        // FlowLayout con más espacio entre los "botones flor"
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 25));
         panel.setBackground(Color.BLACK);
+        panel.setBorder(BorderFactory.createTitledBorder(
+                new LineBorder(Color.WHITE, 2), "☆ CONTROLES DE FLORES ☆",
+                0, 0, null, Color.WHITE));
 
         List<Habilidad> habilidades = HabilidadFactory.crearHabilidades();
         for (Habilidad h : habilidades) {
@@ -138,47 +99,37 @@ public class GameWindow extends JFrame {
         return panel;
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  Botones de habilidad
-    // ─────────────────────────────────────────────────────────
-
-    /**
-     * Construye un botón visual para una habilidad específica,
-     * incluyendo su lógica de cooldown y activación.
-     *
-     * @param habilidad datos de la habilidad a representar
-     * @return botón configurado y listo para usar
-     */
     private JButton construirBotonHabilidad(Habilidad habilidad) {
-        JButton btn = new JButton(habilidad.getEtiquetaUI());
-        btn.setFont(new Font("Consolas", Font.BOLD, 14));
-        btn.setForeground(Color.WHITE);
+        // Asignamos el emoji/ícono según la habilidad
+        String icono = switch (habilidad.getNombre()) {
+            case "Llama" -> "🌸 ";
+            case "Rayo"  -> "💧 ";
+            default      -> "🍃 ";
+        };
+
+        JButton btn = new JButton(icono + habilidad.getEtiquetaUI().toUpperCase());
+        btn.setFont(new Font("SansSerif", Font.BOLD, 15));
+        btn.setForeground(Color.BLACK);
         btn.setBackground(resolverColorHabilidad(habilidad.getNombre()));
+
+        // Estilo "Cartoon": Borde negro grueso y sin relieve de foco
+        btn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         btn.setFocusPainted(false);
-        btn.setPreferredSize(new Dimension(180, 50));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn.setPreferredSize(new Dimension(220, 60));
 
         btn.addActionListener(e -> manejarClicHabilidad(habilidad, btn));
 
         return btn;
     }
 
-    /**
-     * Maneja el evento de clic sobre un botón de habilidad.
-     *
-     * <p>Valida el turno y el cooldown antes de ejecutar el ataque.</p>
-     *
-     * @param habilidad habilidad asociada al botón presionado
-     * @param btn       botón que fue presionado
-     */
     private void manejarClicHabilidad(Habilidad habilidad, JButton btn) {
         if (!battle.isMiTurno()) {
-            JOptionPane.showMessageDialog(this, "¡Espera tu turno!");
+            JOptionPane.showMessageDialog(this, "¡Espera tu turno, heroína!");
             return;
         }
 
-        if (!btn.isEnabled()) {
-            return; // Está en cooldown, el timer lo maneja
-        }
+        if (!btn.isEnabled()) return;
 
         battle.realizarAtaque(habilidad.getDanio(), habilidad.getNombre());
         actualizarInterfaz();
@@ -188,49 +139,29 @@ public class GameWindow extends JFrame {
         }
     }
 
-    /**
-     * Inicia la cuenta regresiva de cooldown para un botón de habilidad.
-     *
-     * <p>El botón queda deshabilitado y muestra los segundos restantes
-     * hasta que el cooldown termina.</p>
-     *
-     * @param btn       botón a bloquear durante el cooldown
-     * @param habilidad habilidad cuyo cooldown se activa
-     */
     private void activarCooldown(JButton btn, Habilidad habilidad) {
         btn.setEnabled(false);
+        btn.setBackground(Color.GRAY); // Se pone gris mientras carga
         final int[] restantes = {habilidad.getCooldownSegundos()};
-        final String etiquetaOriginal = habilidad.getEtiquetaUI();
+        final String etiquetaOriginal = btn.getText();
 
         Timer timer = new Timer(1000, null);
         timer.addActionListener(tick -> {
             restantes[0]--;
             if (restantes[0] <= 0) {
                 btn.setText(etiquetaOriginal);
+                btn.setBackground(resolverColorHabilidad(habilidad.getNombre()));
                 btn.setEnabled(true);
                 timer.stop();
             } else {
-                btn.setText(etiquetaOriginal + " (" + restantes[0] + "s)");
+                btn.setText("CARGANDO... (" + restantes[0] + "s)");
             }
         });
-
         timer.start();
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  Acciones
-    // ─────────────────────────────────────────────────────────
-
-    /**
-     * Ejecuta la habilidad de acceso rápido (clic en el área de juego).
-     *
-     * <p>Muestra un mensaje si no es el turno del jugador.</p>
-     */
     private void ejecutarHabilidadRapida() {
-        if (!battle.isMiTurno()) {
-            JOptionPane.showMessageDialog(this, "¡Espera tu turno!");
-            return;
-        }
+        if (!battle.isMiTurno()) return;
 
         HabilidadFactory.crearHabilidades().stream()
                 .filter(h -> h.getNombre().equals(HABILIDAD_RAPIDA))
@@ -241,63 +172,34 @@ public class GameWindow extends JFrame {
                 });
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  Actualización de UI
-    // ─────────────────────────────────────────────────────────
-
-    /**
-     * Refresca la etiqueta de estado con la vida y turno actuales.
-     *
-     * <p>Si el jugador ha perdido, muestra un mensaje de derrota
-     * y deshabilita todos los botones de habilidad.</p>
-     *
-     * <p>Debe llamarse desde cualquier hilo; usa
-     * {@link SwingUtilities#invokeLater} internamente.</p>
-     */
     public void actualizarInterfaz() {
         SwingUtilities.invokeLater(() -> {
             if (battle.getMiVida() <= 0) {
-                labelStatus.setText("☠️ HAS PERDIDO ☠️");
+                labelStatus.setText("☠️ DERROTA - MOJO JOJO GANÓ ☠️");
                 labelStatus.setForeground(Color.RED);
                 deshabilitarTodosLosBotones();
             } else {
                 labelStatus.setText(obtenerTextoEstado());
+                // Cambia color de vida si está baja
+                if (battle.getMiVida() < 30) labelStatus.setForeground(Color.YELLOW);
             }
         });
     }
 
-    /**
-     * Deshabilita todos los botones de habilidad (usado al perder).
-     */
     private void deshabilitarTodosLosBotones() {
         botonesHabilidad.values().forEach(btn -> btn.setEnabled(false));
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  Utilidades
-    // ─────────────────────────────────────────────────────────
-
-    /**
-     * Genera el texto de estado actual: vida y turno del jugador.
-     *
-     * @return cadena formateada para mostrar en {@code labelStatus}
-     */
     private String obtenerTextoEstado() {
-        String turno = battle.isMiTurno() ? "Tu Turno" : "Turno Enemigo";
-        return "Vida: " + battle.getMiVida() + " | " + turno;
+        String turno = battle.isMiTurno() ? "TU TURNO" : "TURNO RIVAL";
+        return "♥ VIDA: " + battle.getMiVida() + " | " + turno + " ♥";
     }
 
-    /**
-     * Resuelve el color del botón según el nombre de la habilidad.
-     *
-     * @param nombreHabilidad nombre de la habilidad
-     * @return color asignado para la habilidad
-     */
     private Color resolverColorHabilidad(String nombreHabilidad) {
         return switch (nombreHabilidad) {
-            case "Llama" -> new Color(200, 80, 0);
-            case "Rayo"  -> new Color(50, 50, 200);
-            default      -> Color.GRAY;
+            case "Llama" -> COLOR_BOMBON;
+            case "Rayo"  -> COLOR_BURBUJA;
+            default      -> COLOR_BELLOTA;
         };
     }
 }
