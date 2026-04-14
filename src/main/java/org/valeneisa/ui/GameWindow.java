@@ -37,7 +37,7 @@ public class GameWindow extends JFrame {
     }
 
     private void construirVentana(String nombre) {
-        setTitle("♡ CELESTIAL FURY ♡ - " + nombre);
+        setTitle("♡ CELESTIAL FURY ♡" + nombre);
         setSize(900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -125,7 +125,7 @@ public class GameWindow extends JFrame {
 
     private void manejarClicHabilidad(Habilidad habilidad, JButton btn) {
         if (!battle.isMiTurno()) {
-            JOptionPane.showMessageDialog(this, "¡Espera tu turno, heroína!");
+            JOptionPane.showMessageDialog(this, "¡Espera el turno de tu heroína!");
             return;
         }
 

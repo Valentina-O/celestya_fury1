@@ -26,10 +26,10 @@ public class Main {
 
             // workDir ya ES la carpeta "src", así que buscamos directamente dentro de ella
             String[] carpetasBase = {
+                    workDir + "/src/resources/static/",  // ← agrega esta línea
                     workDir + "/resources/static/",
                     workDir + "/main/resources/static/",
                     workDir + "/resources/",
-                    workDir + "/main/resources/",
                     workDir + "/static/"
             };
 
