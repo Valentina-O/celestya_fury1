@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3116a352-2c8f-4c91-ae63-d1140f81dc88" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/gameInit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/BattleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/GameEngine.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/Habilidad.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/HabilidadFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/ISoundPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/core/SoundManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/network/DatabaseClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/network/UdpManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/network/UdpReceiver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/network/UdpSender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/patterns/INetworkObserver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/patterns/Protocolo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/ui/GameWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/celestya_fury1/org/valeneisa/ui/GameWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/bellota-character.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/bellota-character.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/bombom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/bombon-character.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/brisa-character.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/brisa.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/burbuja-character.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/characters/burbuja.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/icons/explosion-effect.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/icons/flower-beam.svg" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/images/icons/flower-beam.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/icons/flower-kick.svg" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/images/icons/flower-kick.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/images/icons/flower-punch.svg" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/images/icons/flower-punch.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/sounds/Explosion.wav" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/sounds/Explosion.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/sounds/Ganador.wav" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/sounds/Ganador.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/sounds/Patada.wav" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/sounds/Patada.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/assets/sounds/Puño.wav" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/assets/sounds/Puño.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/css/animations.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/css/animations.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/css/character-selection.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/css/character-selection.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/css/error.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/css/error.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/characterManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/characterManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/gameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/gameController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/gameInit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/playerName.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/playerName.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/socketClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/socketClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/static/js/virtualController.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/org/resources/static/js/virtualController.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;isabellacruzq-lgtm&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Valentina-O/celestya_fury1.git&quot;,
+    &quot;accountId&quot;: &quot;06481a88-b96b-4460-8cb8-73c01c522354&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3CGucDEQVxa4qoJ4Sc7qT6sVoq8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/frontend-css-fixes",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/isita/OneDrive/Documentos/celestya_fury1/src"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src\main\java\org\valeneisa\resources\static\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src\main\java\org" />
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src\resources\static" />
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src" />
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src\main\java\org\valeneisa\ui" />
+      <recent name="C:\Users\isita\OneDrive\Documentos\celestya_fury1\src\main\java\org\valeneisa" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="celestya_fury1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="celestya_fury1" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3116a352-2c8f-4c91-ae63-d1140f81dc88" name="Changes" comment="" />
+      <created>1776024304415</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776024304415</updated>
+    </task>
+    <servers />
+  </component>
+</project>
